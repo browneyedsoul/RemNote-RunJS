@@ -1,22 +1,26 @@
 {
   "manifestVersion": 1,
-  "id": "plugin_template",
-  "name": "Plugin Template",
-  "author": "remnote",
-  "repoUrl": "",
+  "id": "runjs",
+  "name": "Run JS",
+  "author": "Min-Ki Park",
+  "repoUrl": "https://github.com/browneyedsoul/RemNote-RunJS",
   "version": {
     "major": 0,
-    "minor": 0,
-    "patch": 1
+    "minor": 1,
+    "patch": 0
   },
   "theme": [],
-  "enableOnMobile": false,
-  "description": "",
+  "enableOnMobile": true,
+  "description": "Test your JavaScript code snippets within the RemNote environment with ease",
   "requestNative": false,
   "requiredScopes": [
     {
       "type": "All",
-      "level": "Read"
+      "level": "ReadCreateModifyDelete"
+    },
+    {
+      "type": "FocusedSubtree",
+      "level": "ReadCreateModifyDelete"
     }
   ]
 }
