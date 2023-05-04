@@ -23,7 +23,7 @@ const RunCSS = `
 `;
 
 async function onActivate(plugin: ReactRNPlugin) {
-  await plugin.app.registerPowerup("Run JS", RUNJS, "A smart block plugin", {
+  await plugin.app.registerPowerup("Run JS", RUNJS, "A Code block power-up for JS Evaluation", {
     slots: [],
   });
   
