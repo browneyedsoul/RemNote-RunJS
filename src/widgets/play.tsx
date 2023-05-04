@@ -5,7 +5,7 @@ export const PlayButton = () => {
         xmlns="http://www.w3.org/2000/svg"
         width="20"
         height="20"
-        fill="#000"
+        fill="#9D9D9D"
         version="1.1"
         viewBox="0 0 60 60"
         xmlSpace="preserve"
