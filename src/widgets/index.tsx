@@ -16,11 +16,6 @@ const RunJSBlock: RichTextInterface = [
     language: "javascript",
   },
 ];
-const RunCSS = `
-  [data-rem-tags~="run-js"] .rn-editor__right__side {
-      display: none;
-  }
-`;
 
 async function onActivate(plugin: ReactRNPlugin) {
   await plugin.app.registerPowerup("Run JS", RUNJS, "A Code block power-up for JS Evaluation", {
@@ -63,7 +58,6 @@ async function onActivate(plugin: ReactRNPlugin) {
       }
     },
   });
-  await plugin.app.registerCSS("remove tag", RunCSS);
 }
 
 async function onDeactivate(_: ReactRNPlugin) {}
