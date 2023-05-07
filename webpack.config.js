@@ -92,6 +92,7 @@ const config = {
       patterns: [
         { from: "public", to: "" },
         { from: "README.md", to: "" },
+        { from: "src/App.css", to: "" },
       ],
     }),
     fastRefresh,
