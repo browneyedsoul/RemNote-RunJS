@@ -8,6 +8,7 @@ import {
   WidgetLocation,
 } from "@remnote/plugin-sdk";
 import { PlayButton } from "./play";
+import { ClearConsole } from "./clear";
 
 export function RunJS() {
   let evaluate: any;
@@ -41,6 +42,9 @@ export function RunJS() {
   const Refresh = async () => {
     useAPIEventListener(AppEvents.RemChanged, widgetContext?.remId, () => renderText());
   }
+  const Clear = async () => {
+    await console.clear();
+  }
 
   useEffect(() => {
     renderText();
@@ -51,16 +55,22 @@ export function RunJS() {
   Refresh();
   
   return evaluate && "" + evaluate != text?.trim() ? (
-    <div className="flex ml-6 p-2 text-lg">
+    <div className="flex ml-6 p-2 text-lg gap-2">
       <button onClick={Play}>
         <PlayButton />
+      </button>
+      <button onClick={Clear}>
+        <ClearConsole />
       </button>
       <div className="ml-6 p-2">{evaluate}</div>
     </div>
   ) : (
-    <div className="flex ml-6 p-2 text-lg">
+    <div className="flex ml-6 p-2 text-lg gap-2">
       <button onClick={Play}>
         <PlayButton />
+      </button>
+      <button onClick={Clear}>
+        <ClearConsole />
       </button>
       <div className="ml-6 p-2 w-full"></div>
     </div>

@@ -5,8 +5,15 @@ import {
   ReactRNPlugin,
 } from "@remnote/plugin-sdk";
 import "../style.css";
+import "../App.css";
 
 export const RUNJS = "runjs_powerup";
+
+const runCSS = `
+  [data-rem-tags~="run-js"] .rn-editor__right__side {
+      display: none;
+  }
+`;
 
 const RunJSBlock: RichTextInterface = [
   {
@@ -58,6 +65,16 @@ async function onActivate(plugin: ReactRNPlugin) {
       }
     },
   });
+  await plugin.app.registerCommand({
+    id: "run_js_console_clear",
+    name: "Run JS Console Clear",
+    quickCode: "jsc",
+    keyboardShortcut: "opt+shift+w",
+    action: async () => {
+      await console.clear();
+    },
+  });
+  await plugin.app.registerCSS('runCSS', runCSS);
 }
 
 async function onDeactivate(_: ReactRNPlugin) {}
