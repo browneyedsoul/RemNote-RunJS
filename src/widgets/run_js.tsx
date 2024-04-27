@@ -7,8 +7,8 @@ import {
   useRunAsync,
   WidgetLocation,
 } from "@remnote/plugin-sdk";
-import { PlayButton } from "./play";
-import { ClearConsole } from "./clear";
+import { PlayButton } from "./components/playButton";
+import { ClearButton } from "./components/clearButton";
 
 export function RunJS() {
   let evaluate: any;
@@ -32,45 +32,39 @@ export function RunJS() {
     await setText(text);
   };
 
-  const Play = async () => {
+  const evaluateCodeblock = async () => {
     try {
       evaluate = await eval(text || "");
     } catch (error) {
       console.error(error);
     }
   }
-  const Refresh = async () => {
-    useAPIEventListener(AppEvents.RemChanged, widgetContext?.remId, () => renderText());
-  }
-  const Clear = async () => {
-    await console.clear();
-  }
+
+  const clearResult = async () => await console.clear();
+
+  useAPIEventListener(AppEvents.RemChanged, widgetContext?.remId, () => renderText());
 
   useEffect(() => {
     renderText();
   }, [widgetContext?.remId]);
-  
-  Play();
 
-  Refresh();
-  
   return evaluate && "" + evaluate != text?.trim() ? (
-    <div className="flex ml-6 p-2 text-lg gap-2">
-      <button onClick={Play}>
+    <div className="flex gap-2 ml-6 p-2 text-lg">
+      <button onClick={evaluateCodeblock}>
         <PlayButton />
       </button>
-      <button onClick={Clear}>
-        <ClearConsole />
+      <button onClick={clearResult}>
+        <ClearButton />
       </button>
       <div className="ml-6 p-2">{evaluate}</div>
     </div>
   ) : (
-    <div className="flex ml-6 p-2 text-lg gap-2">
-      <button onClick={Play}>
+    <div className="flex gap-2 ml-6 p-2 text-lg">
+      <button onClick={evaluateCodeblock}>
         <PlayButton />
       </button>
-      <button onClick={Clear}>
-        <ClearConsole />
+      <button onClick={clearResult}>
+        <ClearButton />
       </button>
       <div className="ml-6 p-2 w-full"></div>
     </div>

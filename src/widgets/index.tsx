@@ -6,14 +6,9 @@ import {
 } from "@remnote/plugin-sdk";
 import "../style.css";
 import "../App.css";
+import { runCSS } from "./components/style";
 
 export const RUNJS = "runjs_powerup";
-
-const runCSS = `
-  [data-rem-tags~="run-js"] .rn-editor__right__side {
-      display: none;
-  }
-`;
 
 const RunJSBlock: RichTextInterface = [
   {
@@ -38,15 +33,15 @@ async function onActivate(plugin: ReactRNPlugin) {
 
   await plugin.app.registerCommand({
     id: "run_js",
-    name: "Run JS",
-    quickCode: "jsr",
+    name: "Turn Focused Codeblock into RunJS",
+    quickCode: "js",
     keyboardShortcut: "opt+shift+c",
     action: async () => {
       const rem = await plugin.focus.getFocusedRem();
 
       const jsTagged = await rem?.hasPowerup(RUNJS);
       // const isCodeBlock = await rem?.isCode();
-      const isRem = await rem?.text[0];
+      const isRem = rem?.text[0];
 
       if (isRem === undefined && jsTagged === false) {
         await rem?.addPowerup(RUNJS);
@@ -67,13 +62,14 @@ async function onActivate(plugin: ReactRNPlugin) {
   });
   await plugin.app.registerCommand({
     id: "run_js_console_clear",
-    name: "Run JS Console Clear",
+    name: "Console Clear",
     quickCode: "jsc",
     keyboardShortcut: "opt+shift+w",
     action: async () => {
-      await console.clear();
+      console.clear();
     },
   });
+  
   await plugin.app.registerCSS('runCSS', runCSS);
 }
 
